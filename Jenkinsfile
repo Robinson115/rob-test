@@ -35,6 +35,7 @@ pipeline {
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
             Comitted by: ${env.GIT_AUTHOR}
+            '\nMy_Report:'
             Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
         success {
@@ -43,6 +44,7 @@ pipeline {
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
             Comitted by: ${env.GIT_AUTHOR}
+            '\nMy_Report:'
             Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
     }
