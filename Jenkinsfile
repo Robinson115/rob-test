@@ -34,7 +34,7 @@ pipeline {
             Job: ${env.JOB_NAME}
             Build #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
-            Comitted by: ${env.GIT_AUTHOR}
+            Comitted by: ${env.BUILD_USER}
             Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
         success {
@@ -42,7 +42,7 @@ pipeline {
             Job: ${env.JOB_NAME}
             Build #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
-            Comitted by: ${env.GIT_AUTHOR}
+            Comitted by: ${env.BUILD_USER}
             Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
     }
