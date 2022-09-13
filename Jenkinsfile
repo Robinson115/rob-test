@@ -7,13 +7,13 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Hello World!"
+                echo "Hello Worl!"
             }
         }
     }
     post {
         success {
-            slackSend channel: "#test-slack", color: 'warning', message: "${env.BUILD_TAG} became unstable with change :\n" +
+            slackSend channel: "#test-slack", color: 'good', message: "${env.BUILD_TAG} became success with change :\n" +
             "commit ${env.CHANGE_ID}\n" +
             "Author: ${env.CHANGE_AUTHOR_DISPLAY_NAME} <${env.CHANGE_AUTHOR_EMAIL}>\n" +
             "\t${env.CHANGE_TITLE}\n" +
