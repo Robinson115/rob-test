@@ -16,7 +16,7 @@ pipeline {
             slackSend channel: "#test-slack", color: 'good', message: "${env.BUILD_TAG} became success with change :\n" +
             "commit ${env.CHANGE_ID}\n" +
             "Author: ${env.CHANGE_AUTHOR_DISPLAY_NAME} <${env.CHANGE_AUTHOR_EMAIL}>\n" +
-            "\t${env.CHANGE_TITLE}\n" +
+            "\t${GIT_LAST_COMMIT_DESCRIPTION}\n" +
             "See : ${env.JOB_URL}"
         }
         unstable {
