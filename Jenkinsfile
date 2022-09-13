@@ -12,6 +12,13 @@ pipeline {
         }
     }
     post {
+        success {
+            slackSend channel: "#test-slack", color: 'warning', message: "${env.BUILD_TAG} became unstable with change :\n" +
+            "commit ${env.CHANGE_ID}\n" +
+            "Author: ${env.CHANGE_AUTHOR_DISPLAY_NAME} <${env.CHANGE_AUTHOR_EMAIL}>\n" +
+            "\t${env.CHANGE_TITLE}\n" +
+            "See : ${env.JOB_URL}"
+        }
         unstable {
             slackSend channel: "#test-slack", color: 'warning', message: "${env.BUILD_TAG} became unstable with change :\n" +
             "commit ${env.CHANGE_ID}\n" +
