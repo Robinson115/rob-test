@@ -35,7 +35,8 @@ pipeline {
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
             Comitted by: ${env.GIT_AUTHOR}
-            Last commit message: '${env.GIT_COMMIT_MSG}'""" by ${BUILD_USER})
+            Last commit message: '${env.GIT_COMMIT_MSG}'""" 
+            by ${BUILD_USER})
         }
         success {
             slackSend (channel: '#test-slack', color: '#00FF00', message: """SUCCESS:
@@ -43,7 +44,8 @@ pipeline {
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
             Comitted by: ${env.GIT_AUTHOR}
-            Last commit message: '${env.GIT_COMMIT_MSG}'""" by ${BUILD_USER})
+            Last commit message: '${env.GIT_COMMIT_MSG}'"""
+            by ${BUILD_USER})
         }
     }
 }
