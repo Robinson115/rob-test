@@ -7,7 +7,7 @@ def getBuildUser(){
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 pipeline {
-    agent { label 'master' }
+    agent any
     
     environment{
         BUILD_USER=''
