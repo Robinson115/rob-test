@@ -1,5 +1,5 @@
 def COLOR_MAP = [
-    'STRATED': 'warning'
+    'STRATED': 'warning',
     'SUCCESS': 'good',
     'FAILURE': 'danger'
 ]
