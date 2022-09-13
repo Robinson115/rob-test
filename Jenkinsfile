@@ -26,7 +26,7 @@ pipeline {
             }
             slackSend channel: '#test-slack',
                       color: COLOR_MAP[currentBuild.currenResult],
-                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER} \n More information at: $(env.BUILD_URL}"
+                      message: "*${currentBuild.currentResult}:* ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER} \n More information at: ${env.BUILD_URL}"
         }
     }
 }
