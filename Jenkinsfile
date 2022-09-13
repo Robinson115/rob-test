@@ -30,7 +30,7 @@ pipeline {
     }
     post {
         failure {
-            slackSend (channel: 'xyz-build-failure', color: '#FF0000', message: """FAILED:
+            slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
             Job: ${env.JOB_NAME}
             Build #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
@@ -38,7 +38,7 @@ pipeline {
             Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
         success {
-            slackSend (channel: 'xyz-build-success', color: '#00FF00', message: """SUCCESS:
+            slackSend (channel: '#test-slack', color: '#00FF00', message: """SUCCESS:
             Job: ${env.JOB_NAME}
             Build #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
