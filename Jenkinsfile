@@ -30,22 +30,20 @@ pipeline {
     }
     post {
         failure {
-            slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
+            slackSend (channel: '#test-slack', color: '#FF0000',${env.BUILD_USER}, message: """FAILED:
             Job: ${env.JOB_NAME}
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
             Comitted by: ${env.GIT_AUTHOR}
-            Last commit message: '${env.GIT_COMMIT_MSG}'""" 
-            by ${BUILD_USER})
+            Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
         success {
-            slackSend (channel: '#test-slack', color: '#00FF00', message: """SUCCESS:
+            slackSend (channel: '#test-slack', color: '#00FF00',${env.BUILD_USER}, message: """SUCCESS:
             Job: ${env.JOB_NAME}
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
             Comitted by: ${env.GIT_AUTHOR}
-            Last commit message: '${env.GIT_COMMIT_MSG}'"""
-            by ${BUILD_USER})
+            Last commit message: '${env.GIT_COMMIT_MSG}'""")
         }
     }
 }
