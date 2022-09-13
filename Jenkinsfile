@@ -1,3 +1,12 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good',
+    'FAILURE': 'danger'
+]
+
+def getBuildUser(){
+    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+}
+
 pipeline {
     agent any
     
@@ -7,23 +16,23 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Hello Worl!"
+                echo "Hello World!"
             }
-        }
+        stage('Get commit details') {
+            steps {
+                script {
+                    env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+                    env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+                }
+            }    
+        }    
     }
     post {
         success {
-            slackSend channel: "#test-slack", color: 'good', message: "${env.BUILD_TAG} became success with change :\n" +
-            "commit ${env.CHANGE_ID}\n" +
+            slackSend channel: "#test-slack", color: 'warning', message: "${env.BUILD_TAG} became success with change :\n" +
+            "commit ${env.GIT_AUTHOR}\n" +
             "Author: ${env.CHANGE_AUTHOR_DISPLAY_NAME} <${env.CHANGE_AUTHOR_EMAIL}>\n" +
-            "\t${GIT_LAST_COMMIT_DESCRIPTION}\n" +
-            "See : ${env.JOB_URL}"
-        }
-        unstable {
-            slackSend channel: "#test-slack", color: 'warning', message: "${env.BUILD_TAG} became unstable with change :\n" +
-            "commit ${env.CHANGE_ID}\n" +
-            "Author: ${env.CHANGE_AUTHOR_DISPLAY_NAME} <${env.CHANGE_AUTHOR_EMAIL}>\n" +
-            "\t${env.CHANGE_TITLE}\n" +
+            "\t${env.GIT_COMMIT_MSG}\n" +
             "See : ${env.JOB_URL}"
         }
         failure {
@@ -33,6 +42,6 @@ pipeline {
             "\t${env.CHANGE_TITLE}\n" +
             "See : ${env.JOB_URL}"
         }
-            
     }
 }
+
