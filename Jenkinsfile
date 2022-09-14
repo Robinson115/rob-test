@@ -12,7 +12,7 @@ pipeline {
         stage('build') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
-                    echo "Hello World!"
+                    ech "Hello World!"
                 }
             }
         }        
