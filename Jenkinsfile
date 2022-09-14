@@ -29,21 +29,28 @@ pipeline {
         }
     }
     post {
-        failure {
-            slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
-            Job: ${env.JOB_NAME}
-            Build: #${env.BUILD_NUMBER}
-            Build: ${env.BUILD_URL})
-            Comitted by: ${env.GIT_AUTHOR}
-            Last commit message: '${env.GIT_COMMIT_MSG}'""")
-        }
-        success {
-            slackSend (channel: '#test-slack', color: '#00FF00', message: """SUCCESS:
-            Job: ${env.JOB_NAME}
-            Build: #${env.BUILD_NUMBER}
-            Build: ${env.BUILD_URL})
-            Comitted by: ${env.GIT_AUTHOR}
-            Last commit message: '${env.GIT_COMMIT_MSG}'""")
+        always{
+            script{
+                BUILD_USER = getBuildUser()
+            }
+            failure {
+                slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
+                y:${BUILD_USER}
+                Job: ${env.JOB_NAME}
+                Build: #${env.BUILD_NUMBER}
+                Build: ${env.BUILD_URL})
+                Comitted by: ${env.GIT_AUTHOR}
+                Last commit message: '${env.GIT_COMMIT_MSG}'""")
+            }
+            success {
+                slackSend (channel: '#test-slack', color: '#00FF00', message: """SUCCESS:
+                By:${BUILD_USER}
+                Job: ${env.JOB_NAME}
+                Build: #${env.BUILD_NUMBER}
+                Build: ${env.BUILD_URL})
+                Comitted by: ${env.GIT_AUTHOR}
+                Last commit message: '${env.GIT_COMMIT_MSG}'""")
+            }
         }
     }
 }
