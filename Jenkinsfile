@@ -23,7 +23,7 @@ pipeline {
                 env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                 BUILD_USER = getBuildUser()  
             } 
-            slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
+            slackSend (channel: '#test-slack', color: '#FF0000', message: """STARTED:
             By:${BUILD_USER}
             Job: ${env.JOB_NAME}
             Build: #${env.BUILD_NUMBER}
