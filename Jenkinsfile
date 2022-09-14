@@ -8,7 +8,7 @@ pipeline {
     environment{
         BUILD_USER=''
     }
-    stages {
+    stages('slack') {
         stage{
             steps{
                 slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
