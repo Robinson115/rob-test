@@ -9,13 +9,6 @@ pipeline {
         BUILD_USER=''
     }
     stages {
-        stage('build') {
-            steps {
-                catchError(buildResult: 'SUCCESS',stageResult: 'FAILURE'){
-                    ech "Hello World!"
-                }
-            }
-        }        
         stage('Get commit details') {
             steps {
                 script {
@@ -24,8 +17,13 @@ pipeline {
                     BUILD_USER = getBuildUser()  
                 }
             }
+        }    
+        stage('build') {
+            steps {
+                ech "Hello World!"
+            }
         }        
-    }    
+    }        
 
     post {
         failure {
