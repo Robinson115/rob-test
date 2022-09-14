@@ -11,7 +11,10 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Hello World!"
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                    echo "Hello World!"
+                }
+                
             }
         }
     }    
