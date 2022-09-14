@@ -20,7 +20,7 @@ pipeline {
         }    
         stage('build') {
             steps {
-                ech "Hello World!"
+                echo "Hello World!"
             }
         }        
     }        
