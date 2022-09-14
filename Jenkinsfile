@@ -14,12 +14,9 @@ pipeline {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
                     echo "Hello World!"
                 }
-                
             }
-        }
-    }    
-    stages{
-         stage('Get commit details') {
+        }        
+        stage('Get commit details') {
             steps {
                 script {
                     env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
