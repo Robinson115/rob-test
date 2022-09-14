@@ -11,17 +11,23 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Hello World!"
+                ech "Hello World!"
             }
         }
     }
     post {
         always{
             script {
+                env.GIT_COMMIT_CHANGES = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                 env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                 env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                 BUILD_USER = getBuildUser()  
             } 
+            slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
+            By:${BUILD_USER}
+            Job: ${env.JOB_NAME}
+            Build: #${env.BUILD_NUMBER}
+            Comitted by: ${env.GIT_AUTHOR}""")
         }                   
         failure {
             slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
