@@ -27,7 +27,7 @@ pipeline {
     post {
         failure {
             slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
-            y:${BUILD_USER}
+            By:${BUILD_USER}
             Job: ${env.JOB_NAME}
             Build: #${env.BUILD_NUMBER}
             Build: ${env.BUILD_URL})
