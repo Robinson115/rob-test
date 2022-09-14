@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                catchError(buildResult: 'FAILURE',stageResult: 'FAILURE'){
+                catchError(buildResult: 'SUCCESS',stageResult: 'FAILURE'){
                     ech "Hello World!"
                 }
             }
