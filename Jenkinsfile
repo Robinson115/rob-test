@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                catchError(stageResult: 'FAILURE'){
                     ech "Hello World!"
                 }
             }
@@ -19,7 +19,7 @@ pipeline {
         stage('Get commit details') {
             steps {
                 script {
-                    env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+                    env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B $  {GIT_COMMIT}', returnStdout: true).trim()
                     env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
                     BUILD_USER = getBuildUser()  
                 }
