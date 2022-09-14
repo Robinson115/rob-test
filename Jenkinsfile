@@ -8,18 +8,10 @@ pipeline {
     environment{
         BUILD_USER=''
     }
-    stages('slack') {
-        stage{
-            steps{
-                slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
-                By:${BUILD_USER}
-                Job: ${env.JOB_NAME}
-                Build: #${env.BUILD_NUMBER}""")
-            }    
-        }
+    stages {
         stage('build') {
             steps {
-                ech "Hello World!"
+                echo "Hello World!"
             }
         }
     }
