@@ -14,9 +14,7 @@ pipeline {
                 ech "Hello World!"
             }
         }
-            
     }
-
     post {
         always{
             script {
