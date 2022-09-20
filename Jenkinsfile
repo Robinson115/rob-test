@@ -28,7 +28,7 @@ pipeline {
         }                   
         failure {
             slackSend (channel: '#test-slack', color: '#FF0000', message: """FAILED:
-            Job: ${env.BRANCH_NAME}
+            Job: ${env.JOB_NAME}
             Build: #${env.BUILD_NUMBER}
             Build Done by: ${BUILD_USER}
             Build: ${env.BUILD_URL})
@@ -37,7 +37,7 @@ pipeline {
         }
         success {
             slackSend (channel: '#test-slack', color: '#00FF00', message: """SUCCESS:
-            Job: ${env.BRANCH_NAME}
+            Job: ${env.JOB_NAME}
             Build: #${env.BUILD_NUMBER}
             Build Done by: ${BUILD_USER}
             Build: ${env.BUILD_URL})
