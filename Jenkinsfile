@@ -2,6 +2,9 @@ def getBuildUser(){
     return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
 
+var name={'aravind'}
+
+
 pipeline {
     agent any
     
